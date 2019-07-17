@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+	xmlns:o="urn:schemas-microsoft-com:office:office">
+
+	<head>
+		<meta charset="utf-8"> <!-- utf-8 works for most cases -->
+		<meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Use the latest (edge) version of IE rendering engine -->
+		<meta name="x-apple-disable-message-reformatting"> <!-- Disable auto-scale in iOS 10 Mail entirely -->
+		<!--
+	PHPStorm/Webstorm template var:
+	 Email Background color (default "#222222"): #ffffff
+	 Content width (default "640"): 640 (** NUMBER ONLY, no unit specified **)
+	 Font-family (default "sans-serif"): 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif  (can put multiple font, ex: "arial, sans-serif")
+	 Font-size (default "15px"): 14px
+	 Line-height (default "20px"): 16px
+	 Section padding (default "20px"): 36px
+	 Half padding (default "10px" = Section padding / 2): 18px
+	 Section Background Color (default "#ffffff"): #ffffff
+	 Component Margin bottom (default "10px"): 35px
+
+	 Cooked from: https://github.com/TedGoas/Cerberus/blob/3.0.3/cerberus-responsive.html
+	-->
+
+		<title>ST Engineering Cybersecurity</title>
+		<!-- The title tag shows in email notifications, like Android 4.4. -->
+
+		<!-- Web Font / @font-face : BEGIN -->
+		<!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
+
+		<!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+		<!--[if mso]>
+	<style>
+		* {
+			font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif  !important;
+		}
+	</style>
+	<![endif]-->
+
+		<!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+		<!--[if !mso]><!-->
+		<!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+		<!--<![endif]-->
+
+		<!-- Web Font / @font-face : END -->
+
+		<!-- CSS Reset : BEGIN -->
+		<style>
+			/* What it does: Remove spaces around the email design added by some email clients. */
+			/* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+			html,
+			body {
+				margin: 0 auto !important;
+				padding: 0 !important;
+				height: 100% !important;
+				width: 100% !important;
+			}
+
+			/* What it does: Stops email clients resizing small text. */
+			* {
+				-ms-text-size-adjust: 100%;
+				-webkit-text-size-adjust: 100%;
+			}
+
+			/* What it does: Centers email on Android 4.4 */
+			div[style*="margin: 16px 0"] {
+				margin: 0 !important;
+			}
+
+			/* What it does: Stops Outlook from adding extra spacing to tables. */
+			table,
+			td {
+				mso-table-lspace: 0pt !important;
+				mso-table-rspace: 0pt !important;
+			}
+
+			/* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+			table {
+				border-spacing: 0 !important;
+				border-collapse: collapse !important;
+				table-layout: fixed !important;
+				margin: 0 auto !important;
+			}
+
+			table table table {
+				table-layout: auto;
+			}
+
+			/* What it does: Uses a better rendering method when resizing images in IE. */
+			img {
+				-ms-interpolation-mode: bicubic;
+			}
+
+			/* What it does: A work-around for email clients meddling in triggered links. */
+			*[x-apple-data-detectors],
+			/* iOS */
+			.unstyle-auto-detected-links *,
+			.aBn {
+				border-bottom: 0 !important;
+				cursor: default !important;
+				color: inherit !important;
+				text-decoration: none !important;
+				font-size: inherit !important;
+				font-family: inherit !important;
+				font-weight: inherit !important;
+				line-height: inherit !important;
+			}
+
+			/* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
+			.a6S {
+				display: none !important;
+				opacity: 0.01 !important;
+			}
+
+			/* If the above doesn't work, add a .g-img class to any image in question. */
+			img.g-img+div {
+				display: none !important;
+			}
+
+			/* What it does: Prevents underlining the button text in Windows 10 */
+			.button-link {
+				text-decoration: none !important;
+			}
+
+			.no-u-link {
+				text-decoration: none !important;
+			}
+
+			/* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+			/* Create one of these media queries for each additional viewport size you'd like to fix */
+
+			/* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
+			@media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+				.email-container {
+					min-width: 320px !important;
+				}
+			}
+
+			/* iPhone 6, 6S, 7, 8, and X */
+			@media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+				.email-container {
+					min-width: 375px !important;
+				}
+			}
+
+			/* iPhone 6+, 7+, and 8+ */
+			@media only screen and (min-device-width: 414px) {
+				.email-container {
+					min-width: 414px !important;
+				}
+			}
+		</style>
+		<!-- CSS Reset : END -->
+		<!-- Reset list spacing because Outlook ignores much of our inline CSS. -->
+		<!--[if mso]>
+	<style type="text/css">
+		ul,
+		ol {
+			margin: 0 !important;
+		}
+		li {
+			margin-left: 30px !important;
+		}
+		li.list-item-first {
+			margin-top: 0 !important;
+		}
+		li.list-item-last {
+			margin-bottom: 35px !important;
+		}
+	</style>
+	<![endif]-->
+
+		<!-- Progressive Enhancements : BEGIN -->
+		<style>
+			/* What it does: Hover styles for buttons */
+			.button-td,
+			.button-a {
+				transition: all 100ms ease-in;
+			}
+
+			.button-td-primary:hover,
+			.button-a-primary:hover {
+				background: #151515 !important;
+				border-color: #151515 !important;
+			}
+
+			/* Media Queries */
+			@media screen and (max-width: 660px) {
+
+				.email-container {
+					width: 100% !important;
+					margin: auto !important;
+				}
+
+				/* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+				.fluid {
+					width: 100% !important;
+					max-width: 100% !important;
+					height: auto !important;
+					margin-left: auto !important;
+					margin-right: auto !important;
+				}
+
+				/* What it does: Forces table cells into full-width rows. */
+				.stack-column,
+				.stack-column-center {
+					display: block !important;
+					width: 100% !important;
+					max-width: 100% !important;
+					direction: ltr !important;
+				}
+
+				/* And center justify these ones. */
+				.stack-column-center {
+					text-align: center !important;
+				}
+
+				/* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+				.center-on-narrow {
+					text-align: center !important;
+					display: block !important;
+					margin-left: auto !important;
+					margin-right: auto !important;
+					float: none !important;
+				}
+
+				table.center-on-narrow {
+					display: inline-block !important;
+				}
+
+				/* What it does: Adjust typography on small screens to improve readability */
+				.email-container p {
+					/*font-size: 17px !important;*/
+				}
+
+				.w-20 {
+					width: 28% !important;
+					max-width: 28% !important;
+				}
+
+				.w-80 {
+					width: 72% !important;
+					max-width: 72% !important;
+				}
+
+				.text-right {
+					text-align: right !important;
+				}
+
+				.text-center {
+					text-align: center !important;
+				}
+
+				.sm-pad {
+					padding-left: 20px !important;
+					padding-right: 20px !important;
+					padding-top: 15px !important;
+					padding-bottom: 15px !important;
+				}
+
+				.smx-pad {
+					padding-left: 30px !important;
+					padding-right: 30px !important;
+					padding-top: 15px !important;
+					padding-bottom: 15px !important;
+				}
+
+				.sm-pad-sub {
+					padding-left: 20px !important;
+					padding-right: 20px !important;
+					padding-top: 5px !important;
+					padding-bottom: 5px !important;
+				}
+
+				.xm-pad {
+					padding-left: 10px !important;
+					padding-right: 10px !important;
+					padding-top: 5px !important;
+					padding-bottom: 5px !important;
+				}
+				.xm-pad-side {
+					padding-left: 10px !important;
+					padding-right: 10px !important;
+					
+				}
+				.pad-0{
+					padding-left: 0 !important;
+					padding-right: 0 !important;
+				}
+				.bt-mb {
+					width: 140px !important;
+					height: auto !important;
+				}
+
+				.logo-sm,
+				.logo-sm img {
+					width: 110px !important;
+					height: auto;
+				}
+
+				.font-title-sm {
+					font-size: 19px !important;
+				}
+			}
+		</style>
+		<!-- Progressive Enhancements : END -->
+		<!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+		<!--[if gte mso 9]>
+	<xml>
+		<o:OfficeDocumentSettings>
+			<o:AllowPNG/>
+			<o:PixelsPerInch>96</o:PixelsPerInch>
+		</o:OfficeDocumentSettings>
+	</xml>
+	<![endif]-->
+
+	</head>
+
+	<body width="100%" bgcolor="" style="margin: 0; mso-line-height-rule: exactly;">
+		<center style="width:100%;background:rgb(255, 255, 255);text-align:left;">
+			<!-- Visually Hidden Preheader Text : BEGIN -->
+			<div
+				style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family:sans-serif;">
+				STE EDM
+			</div>
+			<!-- Visually Hidden Preheader Text : END -->
+			<!--
+      Set the email width. Defined in two places:
+      1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
+      2. MSO tags for Desktop Windows Outlook enforce a 680px width.
+      Note: The Fluid and Responsive templates have a different width (640px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
+      -->
+
+			<!--[if mso]>
+        <table cellspacing="0" cellpadding="0" border="0" width="640" align="center">
+          <tr>
+            <td>
+              <![endif]-->
+
+			<!-- Email Body : BEGIN -->
+			<table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="640"
+				style="margin: 0 auto;" class="email-container">
+				<!-- Logo, Flush : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#393939" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #393939;">
+						<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="center" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+						<table bgcolor="#393939" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#393939;">
+							<tr>
+								<td class="xm-pad-side" bgcolor="#393939"
+									style="background-color: #393939;padding: 20px 0" align="center"
+									width="100%">
+									<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:640px;background-color:#393939">
+										<tr>
+											<td bgcolor="#393939" style="background-color: #393939; padding-top: 8px; padding-right: 5px;"
+												align="center" width="50%" class="">
+												<img src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/steng_logo.png"
+													width="208" height="34" alt="STE EDM" border="0" class="fluid g-img"
+													style="width: 208px; height: auto; ">
+											</td>
+											<td bgcolor="#393939"
+												style="padding-left:10px;background-color: #393939; font-family: Helvetica, Arial, sans-serif;text-align: center;padding-top:8px;"
+												align="center" valign="middle" width="50%"
+												class="">
+												<img src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/STECA_Logo_Reversed96dpi.png"
+													width="160" height="40" alt="STE EDM" border="0" class="fluid g-img"
+													style="width: 160px; height: auto; ">
+
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+			          </td>
+			        </tr>
+			      </table>
+			      <![endif]-->
+					</td>
+				</tr>
+				<!-- Logo, Flush : END -->
+				<!-- Logo, Flush : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#F8F8F8" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #F8F8F8">
+						<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="center" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+						<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#F8F8F8;font-family:  Helvetica, Arial, sans-serif;">
+							<tr>
+								<td bgcolor="#F8F8F8"
+									style="background-color: #F8F8F8;font-family:  Helvetica, Arial, sans-serif;padding: 15px 10px 10px;"
+									align="center" width="100%">
+									<p
+										style="font-size: 14px; line-height: 26px; text-align: center; margin: 0;font-family:  Helvetica, Arial, sans-serif;">
+										<span style="font-size: 22px; color: #f78046;"><strong><span
+													style="font-family:  Helvetica, Arial, sans-serif;line-height: 26px; font-size: 22px;">
+												Cybersecurity SCADA Engineer (CSSE) - 2 days</span></strong></span></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td bgcolor="#F8F8F8"
+									style="background-color: #F8F8F8;font-family:  Helvetica, Arial, sans-serif;padding: 0"
+									align="center" width="100%">
+									<img align="center" alt="Image" border="0" class="g-img" src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/CSSE.jpg" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 640px; display: block;" title="Image" width="640">
+								</td>
+							</tr>
+							<tr>
+								<td bgcolor="#F8F8F8"
+									style="color:#555555;font-family: Helvetica, Arial, sans-serif;line-height:120%;padding-top:15px;padding-right:5px;padding-bottom:5px;padding-left:5px;"
+									align="center" width="100%">
+									<p style="font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
+										<strong>29&nbsp;to 30&nbsp;July 2019 | Registration closes: 19 July 2019</strong>
+									</p>
+									<p style="font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
+										<strong>—</strong></p>
+									<p style="font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
+										
+										<strong style="background-color: transparent;">13&nbsp;to 14&nbsp;August 2019 |
+											Registration closes: 26 July 2019<br></strong></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td bgcolor="#F8F8F8"
+									style="text-align: left; font-family:Helvetica, sans-serif; font-size:16px;font-weight:bold;line-height: 20px;padding-top:10px; background-color:#F8F8F8; color: #ffffff;padding-bottom: 10px;"
+									align="center" width="100%">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:600px;background-color:#F8F8F8;">
+										<tbody>
+											<tr>
+												<td align="right" height="60" width="50%" valign="middle"
+													style="text-align:right;font-family:Helvetica, sans-serif; font-size:13px;font-weight:normal;background-color:#F8F8F8; color: #ffffff;">
+													<!--[if mso]>
+													<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+													<tr>
+														<td align="right" valign="top" width="100%" style="width:100%;">
+														<![endif]-->
+													<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0"
+														align="right" width="100%" style=" background-color:#F8F8F8">
+														<tr>
+															<td class="xm-pad" width="100%" bgcolor="#F8F8F8"
+																style="background-color: #F8F8F8;padding: 10px 10px;"
+																align="right" width="100%">
+																<a href="https://mailchi.mp/stengg/csse-course-registration"
+																	target="_blank">
+																	<img alt="csse course registration" class="center fixedwidth"
+																		src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/Orange-Register-Now.jpg"
+																		style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 160px; display: block;"
+																		title="Image" width="160" class="g-img"></a>
+
+															</td>
+														</tr>
+													</table>
+													<!--[if mso]>
+													</td>
+													</tr>
+												</table>
+												<![endif]-->
+												</td>
+												<td align="left" height="60" width="50%" valign="middle"
+													style="text-align:right;font-family:Helvetica, sans-serif; font-size:13px;font-weight:normal;background-color:#F8F8F8; color: #ffffff;">
+													<!--[if mso]>
+													<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+													<tr>
+														<td align="left" valign="top" width="100%" style="width:100%;">
+														<![endif]-->
+													<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0"
+														align="left" width="100%" style=" background-color:#F8F8F8">
+														<tr>
+															<td class="xm-pad" width="100%" bgcolor="#F8F8F8"
+																style="background-color: #F8F8F8; padding:10px 10px"
+																align="left" width="100%">
+																<a href="https://gallery.mailchimp.com/218988aed0e5fb4fda3f9de4b/files/922e321d-24ec-460c-9f82-c1817d6bd793/STE_CSSE_201_Leaflet.pdf"
+																	target="_blank">
+																	<img alt="STE CSSE 201 Leaflet" class="center fixedwidth"
+																		src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/Grey-Download-Brochure.jpg"
+																		style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 160px; display: block;"
+																		title="Image" width="160" class="g-img"></a>
+
+															</td>
+
+														</tr>
+													</table>
+													<!--[if mso]>
+													</td>
+													</tr>
+												</table>
+												<![endif]-->
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+			          </td>
+			        </tr>
+			      </table>
+			      <![endif]-->
+					</td>
+				</tr>
+				<!-- Logo, Flush : END -->
+
+
+				<!-- TEXT AREA BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#F8F8F8" valign="middle" align="left"
+						style="background-position:center !important;background-size:cover !important; background-color: #F8F8F8;color: #555555;">
+						<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="left" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="left" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+						<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0" align="left" width="100%"
+							style="max-width:640px;background-color:#F8F8F8">
+							<tr>
+								<td class="" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555; background-color: #F8F8F8; padding:0">
+									<table bgcolor="#FFC6AC" border="0" cellpadding="0" cellspacing="0" align="left"
+										width="100%" style="max-width:640px;background-color:#FFC6AC">
+										<tr>
+											<td class="" align="left" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555;padding: 30px 25px 20px 25px; background-color: #FFC6AC">
+												<p style="font-size: 14px; line-height: 21px; margin: 0;"><span
+														style="color: #555555;font-size: 18px;font-family:  Helvetica, Arial, sans-serif;"><strong>Why
+															Attend</strong></span></p>
+											</td>
+										</tr>
+										<tr>
+											<td class="" align="left" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555; background-color: #FFC6AC;padding: 0 25px 30px;">
+
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													Cybersecurity attacks are becoming more complicated and it is spreading widely globally. It is therefore important to safeguard the organisation from such attacks and in order to do so successfully, one must understand how to identify, analyse, respond and investigate cyber-attacks.</p>
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													&nbsp;</p>
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													By attending this course, one will be able to understand the protection of SCADA networks within a realistic control system environment. Course participants will also have hands-on practice on the various tools to handle potential attacks on the control systems.</p>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 25px 0; background-color: #F8F8F8">
+
+										<p
+										style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#f78046">
+										<span
+											style="font-size: 18px;color:#f78046;font-family:  Helvetica, Arial, sans-serif;"><strong>
+											Learning Outcomes</strong></span></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 30px; background-color: #F8F8F8">
+									<p style="color:#555555;font-size: 14px; line-height: 17px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+											Participants will learn how cyber-attacks are launched, how they work, and mitigation strategies. Through a comparative analysis of IT and control system architecture, security vulnerabilities and mitigation strategies.
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 20px 25px; background-color: #F8F8F8">
+									<!--[if mso]>
+							            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+							              <tr>
+							                <td align="center" valign="top" width="100%" style="width:100%;">
+							                  <![endif]-->
+													<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+														width="100%" style="max-width:640px;background-color:#F8F8F8">
+														<tr>
+															<td valign="top" class="stack-column" bgcolor="#393939" style="background-color: #F8F8F8; "
+																align="center" width="50%" class="">
+																<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+																	width="100%" style="max-width:640px;background-color:#F8F8F8">
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 0 0 15px 0; background-color: #F8F8F8">
+
+																				<p
+																				style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#f78046">
+																				<span
+																					style="font-size: 18px;color:#f78046;font-family:  Helvetica, Arial, sans-serif;"><strong>Course
+																						Topics</strong></span></p>
+
+																		</td>
+																	</tr>
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 0; background-color: #F8F8F8">
+																			<ul style="padding-left: 25px;">
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Cyber Physical System Overview</p>
+																				</li>
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin: 5px 0 5px 0;color:#555555;">IT &amp; OT Networks Discovery</p>
+																				</li>
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Cyber Physical System and Network Attacks and Exploits</p>
+																				</li>
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin:5px 0 0 0;color:#555555;">Network Defence and Incident Response</p>
+																				</li>
+																			</ul>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+															<td valign="top" class="stack-column pad-0" bgcolor="#393939" style="background-color: #F8F8F8;padding: 0 10px 0 25px; "
+																align="center" width="50%" class="">
+																<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+																	width="100%" style="max-width:640px;background-color:#F8F8F8">
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 0; background-color: #F8F8F8">
+
+																				<p
+																				style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#f78046">
+																				<span
+																					style="font-size: 18px;color:#f78046;font-family:  Helvetica, Arial, sans-serif;"><strong>Prerequisites</strong></span></p>
+
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="pad-0" align="left" width="100%" valign="middle"
+																			style="padding: 15px 0 0 0; font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; background-color: #F8F8F8">
+																			<p style="color:#555555;font-size: 14px; line-height: 17px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+																				Basic understanding of industrial control system, cyber physical system or operational technology recommended but not required.
+																			</p>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+													<!--[if mso]>
+												</td>
+											</tr>
+										</table>
+									 <![endif]-->
+								</td>
+							</tr>
+
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 25px 0; background-color: #F8F8F8">
+
+									<p
+										style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#f78046">
+										<span
+											style="font-size: 18px;color:#f78046;font-family:  Helvetica, Arial, sans-serif;"><strong>Who
+												Should Attend</strong></span></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 30px; background-color: #F8F8F8">
+									<ul style="padding-left: 25px;">
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Corporate or Industrial Asset Owners/Vendors/Integrators</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 5px 0 5px 0;color:#555555;">IT Professionals/Engineers</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Information Security Managers and Executives</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin:5px 0 0 0;color:#555555;">Solution Architects</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin:5px 0 0 0;color:#555555;">SCADA Engineers</p>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 5px 10px; background-color: #F8F8F8">
+									<p style="font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
+										<strong>In Collaboration with&nbsp;</strong></p>
+
+
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="center" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: center; max-width: 640px; padding: 0 10px 20px 10px; background-color: #F8F8F8">
+
+									<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="center" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+									<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:640px;background-color:#F8F8F8">
+										<tr>
+											<td bgcolor="#F8F8F8" style="background-color: #F8F8F8" align="center"
+												width="100%">
+												<img alt="Tegasus" border="0" class="center"
+													src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/TegasusLogoV2.png"
+													style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 128px; display: block;"
+													title="Image" width="128">
+
+											</td>
+										</tr>
+									</table>
+									<!--[if mso]>
+								  </td>
+								</tr>
+							  </table>
+							  <![endif]-->
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+			          </td>
+			        </tr>
+			      </table>
+			      <![endif]-->
+					</td>
+				</tr>
+				<!-- TEXT AREA END -->
+
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#F8F8F8" valign="middle" align="center" style="background-position:center !important;background-size:cover !important; background-color: #F8F8F8">
+						<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:640px;background-color:#ff7932;">
+							<tbody><tr>
+								<td class="xm-pad" align="left" width="100%" valign="middle" style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 10px 10px 30px; background-color: #F8F8F8">
+									<table border="0" cellpadding="0" cellspacing="0" class="divider" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;" valign="top" width="100%">
+										<tbody>
+											<tr style="vertical-align: top;" valign="top">
+												<td class="divider_inner" style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjusåt: 100%; border-collapse: collapse;" valign="top">
+													<table align="center" border="0" cellpadding="0" cellspacing="0" class="divider_content" height="0" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; border-top: 7px solid #B9B9B9; height: 0px;" valign="top" width="100%">
+														<tbody>
+															<tr style="vertical-align: top;" valign="top">
+																<td height="0" style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse;" valign="top"><span></span></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle" style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 22px; line-height: 26px; color: #555555;  text-align: left; max-width: 640px; padding: 10px 10px 10px; background-color: #F8F8F8;color: #11654e;">
+									<p style="font-size: 22px; line-height: 26px; text-align: center; margin: 0;">
+										<strong>Cybersecurity Forensic Investigator (CSFI) - 4 Days</strong></p>
+								</td>
+							</tr>
+							<tr>
+								<td class="" align="left" width="100%" valign="middle" style="max-width: 640px; padding: 0; background-color: #F8F8F8;color: #11654e;">
+									<img align="center" alt="Image" border="0" class="center autowidth fullwidth" src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/CSFI-copy_1.jpg" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 640px; display: block;" title="Image" width="640">
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle" style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding-top: 15px; background-color: #F8F8F8;">
+									<p style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ;font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
+										<strong>5&nbsp;to 8&nbsp;August 2019 | Registration closes: 26 July
+											2019</strong>
+									</p>
+
+									<p style="font-size: 14px; line-height: 16px; text-align: center; margin: 15px 0 0 0;">
+										<strong style="background-color: transparent;">14&nbsp;to 17&nbsp;
+											October 2019 | Registration closes: 13 September 2019<br></strong></p>
+
+
+								</td>
+							</tr>
+							<tr>
+								<td bgcolor="#F8F8F8" style="text-align: left; font-family:Helvetica, sans-serif; font-size:16px;font-weight:bold;line-height: 20px;padding-top:10px; background-color:#F8F8F8; color: #ffffff;padding-bottom: 10px;" align="center" width="100%">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:600px;background-color:#F8F8F8;">
+										<tbody>
+											<tr>
+												<td align="right" height="60" width="50%" valign="middle" style="text-align:right;font-family:Helvetica, sans-serif; font-size:13px;font-weight:normal;background-color:#F8F8F8; color: #ffffff;">
+													<!--[if mso]>
+														<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+														<tr>
+															<td align="right" valign="top" width="100%" style="width:100%;">
+															<![endif]-->
+													<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0" align="right" width="100%" style=" background-color:#F8F8F8">
+														<tbody>
+															<tr>
+																<td class="xm-pad" width="100%" bgcolor="#F8F8F8" style="background-color: #F8F8F8;padding: 10px 10px;" align="right">
+																	<a href="https://mailchi.mp/stengg/csfi-course-registration" target="_blank">
+																		<img alt="csfi course registration" class="center fixedwidth" src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/Green-Register-Now.jpg" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 160px; display: block;" title="Image" width="160"></a>
+
+																</td>
+
+															</tr>
+														</tbody>
+													</table>
+													<!--[if mso]>
+														</td>
+														</tr>
+													</table>
+													<![endif]-->
+												</td>
+												<td align="left" height="60" width="50%" valign="middle" style="text-align:right;font-family:Helvetica, sans-serif; font-size:13px;font-weight:normal;background-color:#F8F8F8; color: #ffffff;">
+													<!--[if mso]>
+														<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+														<tr>
+															<td align="left" valign="top" width="100%" style="width:100%;">
+															<![endif]-->
+													<table bgcolor="#F8F8F8" border="0" cellpadding="0" cellspacing="0" align="left" width="100%" style=" background-color:#F8F8F8">
+														<tbody>
+															<tr>
+																<td class="xm-pad" width="100%" bgcolor="#F8F8F8" style="background-color: #F8F8F8; padding:10px 10px" align="left">
+																	<a href="https://gallery.mailchimp.com/218988aed0e5fb4fda3f9de4b/files/a8229600-da0f-44e0-a89b-0083904abb50/STE_CSFI_Leaflet_Overseas_.pdf" target="_blank">
+																		<img alt="STE CSFI Leaflet Overseas" class="center fixedwidth" src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/Grey-Download-Brochure.jpg" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 160px; display: block;" title="Image" width="160"></a>
+
+																</td>
+
+															</tr>
+														</tbody>
+													</table>
+													<!--[if mso]>
+														</td>
+														</tr>
+													</table>
+													<![endif]-->
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555; background-color: #D5EBE5; padding:0">
+									<table bgcolor="#D5EBE5" border="0" cellpadding="0" cellspacing="0" align="left"
+										width="100%" style="max-width:640px;background-color:#D5EBE5">
+										<tr>
+											<td class="" align="left" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555;padding: 30px 25px 20px 25px; background-color: #D5EBE5">
+												<p style="font-size: 14px; line-height: 21px; margin: 0;"><span
+														style="color: #555555;font-size: 18px;font-family:  Helvetica, Arial, sans-serif;"><strong>Why
+															Attend</strong></span></p>
+											</td>
+										</tr>
+										<tr>
+											<td class="" align="left" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 18px; line-height: 20px;   text-align: left; max-width: 640px;  color: #555555; background-color: #D5EBE5;padding: 0 25px 30px;">
+
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													Do you want to gain better understanding of cyber forensics and acquire investigation skillsets? The Cybersecurity Forensics Investigator course focuses on imparting you with cyber forensics concepts and processes including acquisition of forensics evidences, preservation and analysis of the gathered evidences, and presentation of the findings.</p>
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													&nbsp;</p>
+												<p
+													style="color: #555555;font-size: 14px; line-height: 16px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+													The training also encompasses the conduct of forensics investigation on simulated real-world cyber incidents in an emulated enterprise network environment to instill applicable skillsets and enhances knowledge retention. CSFI course provides you with a robust cyber forensics investigation training experience.</p>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #11654e;  text-align: left; max-width: 640px; padding: 15px 25px 0; background-color: #F8F8F8">
+
+										<p
+										style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:##11654e">
+										<span
+											style="font-size: 18px;color:##11654e;font-family:  Helvetica, Arial, sans-serif;"><strong>
+											Learning Outcomes</strong></span></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 30px; background-color: #F8F8F8">
+										<ul style="padding-left: 25px;">
+											<li style="font-size: 14px; line-height: 16px;">
+												<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Understand the entire cyber forensics investigation processes and procedures</p>
+											</li>
+											<li style="font-size: 14px; line-height: 16px;">
+												<p style="font-size: 14px; line-height: 16px; margin: 5px 0 5px 0;color:#555555;">Understand functionality of various forensic tools and its use during investigation</p>
+											</li>
+											<li style="font-size: 14px; line-height: 16px;">
+												<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Develop practical skillsets in forensics investigation from acquisition, preservation, analysis to reporting</p>
+											</li>
+											<li style="font-size: 14px; line-height: 16px;">
+												<p style="font-size: 14px; line-height: 16px; margin:5px 0 0 0;color:#555555;">Recommend preventive measures against future cyber incidents</p>
+											</li>
+										</ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 20px 25px; background-color: #F8F8F8">
+									<!--[if mso]>
+							            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+							              <tr>
+							                <td align="center" valign="top" width="100%" style="width:100%;">
+							                  <![endif]-->
+													<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+														width="100%" style="max-width:640px;background-color:#F8F8F8">
+														<tr>
+															<td valign="top" class="stack-column" bgcolor="#393939" style="background-color: #F8F8F8; "
+																align="center" width="50%" class="">
+																<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+																	width="100%" style="max-width:640px;background-color:#F8F8F8">
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #11654e;  text-align: left; max-width: 640px; padding: 0 0 15px 0; background-color: #F8F8F8">
+
+																				<p
+																				style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#11654e">
+																				<span
+																					style="font-size: 18px;color:#11654e;font-family:  Helvetica, Arial, sans-serif;"><strong>Course Objectives</strong></span></p>
+
+																		</td>
+																	</tr>
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 0; background-color: #F8F8F8">
+																			<ul style="padding-left: 25px;">
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Gain knowledge about computer based crime.</p>
+																				</li>
+																				<li style="font-size: 14px; line-height: 16px;">
+																					<p style="font-size: 14px; line-height: 16px; margin: 5px 0 0 0;color:#555555;">Develop skills to identify and collect evidence from computer based operating system.</p>
+																				</li>
+																			</ul>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+															<td valign="top" class="stack-column pad-0" bgcolor="#393939" style="background-color: #F8F8F8;padding: 0 10px 0 25px; "
+																align="center" width="50%" class="">
+																<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0" align="center"
+																	width="100%" style="max-width:640px;background-color:#F8F8F8">
+																	<tr>
+																		<td align="left" width="100%" valign="middle"
+																			style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #11654e;  text-align: left; max-width: 640px; padding: 0; background-color: #F8F8F8">
+
+																				<p
+																				style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#11654e">
+																				<span
+																					style="font-size: 18px;color:#11654e;font-family:  Helvetica, Arial, sans-serif;"><strong>Prerequisites</strong></span></p>
+
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="pad-0" align="left" width="100%" valign="middle"
+																			style="padding: 15px 0 0 0; font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; background-color: #F8F8F8">
+																			<p style="color:#555555;font-size: 14px; line-height: 17px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: left;">
+																				This course is intended for those with knowledge and hands-on experience on Personal Computers and Network Fundamental, such as CompTIA A+ and Network+ certifications or the equivalent. The intended learners also expected to be familiar with the command line interfaces of the 2 popular OS, Windows, and Linux.
+																			</p>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+													<!--[if mso]>
+												</td>
+											</tr>
+										</table>
+									 <![endif]-->
+								</td>
+							</tr>
+
+							<tr>
+								<td class="sm-pad" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #11654e;  text-align: left; max-width: 640px; padding: 15px 25px 0; background-color: #F8F8F8">
+
+									<p
+										style="font-size: 18px; line-height: 21px; font-family:  Helvetica, Arial, sans-serif;margin: 0;color:#11654e">
+										<span
+											style="font-size: 18px;color:#11654e;font-family:  Helvetica, Arial, sans-serif;"><strong>Who
+												Should Attend</strong></span></p>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="left" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: left; max-width: 640px; padding: 15px 30px; background-color: #F8F8F8">
+
+
+
+
+									<ul style="padding-left: 25px;">
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Security Analysts</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 5px 0 5px 0;color:#555555;">IT Professionals / Engineers</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin: 0;color:#555555;">Information Security Managers and Executives</p>
+										</li>
+										<li style="font-size: 14px; line-height: 16px;">
+											<p style="font-size: 14px; line-height: 16px; margin:5px 0 0 0;color:#555555;">Project Managers, Risk Managers and Compliance Managers</p>
+										</li>
+									</ul>
+								</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				<!-- Box color1 register with Text : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#ffffff" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #ffffff;">
+						<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="center" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+						<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#ffffff;">
+							<tr>
+								<td class="stack-column " width="100%" valign="top"
+									style="font-family:Helvetica, sans-serif; font-size:16px;background-color: #ffffff; color: #ffffff; ">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:100%;background-color:#ffffff;">
+										
+										<tr>
+											<td class="sm-pad" align="center" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: center; max-width: 640px; padding: 10px 10px; background-color: #ffffff;color: #0068A5;">
+												<p style="color:#555555;font-size: 14px; line-height: 17px; margin: 0;font-family:  Helvetica, Arial, sans-serif;text-align: center;">
+													Upon completion of the course,<br>
+
+													participants will receive a <strong>Statement of Attainment (SOA)</strong>  issued by SkillsFuture Singapore (SSG)
+												</p>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="sm-pad-sub" align="center" width="100%" valign="middle"
+									style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: center; max-width: 640px; padding: 0; background-color: #ffffff">
+
+									<!--[if mso]>
+						            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+						              <tr>
+						                <td align="center" valign="top" width="100%" style="width:100%;">
+						                  <![endif]-->
+												<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" align="center"
+													width="100%" style="max-width:640px;background-color:#ffffff">
+													<tr>
+														<td bgcolor="#ffffff" style="background-color: #ffffff" align="center"
+															width="100%">
+															<img alt="Tegasus" border="0" class="center"
+																src="http://edm-demos.constructdigital.net/EDM/STE/CSSE-CSFI/WSQ_logo.png"
+																style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 160px; display: block;"
+																title="Image" width="160">
+
+														</td>
+													</tr>
+												</table>
+												<!--[if mso]>
+											  </td>
+											</tr>
+										</table>
+									<![endif]-->
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+			          </td>
+			        </tr>
+			      </table>
+			      <![endif]-->
+					</td>
+				</tr>
+				<!-- Box color1 register with Text : END -->
+				<!-- Box color1 register with Text : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#ffffff" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #ffffff;">
+						<!--[if mso]>
+			            <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+			              <tr>
+			                <td align="center" valign="top" width="100%" style="width:100%;">
+			                  <![endif]-->
+						<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#ffffff;">
+							<tr>
+								<td class="stack-column " width="100%" valign="top"
+									style="font-family:Helvetica, sans-serif; font-size:16px;background-color: #ffffff; color: #ffffff; ">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:100%;background-color:#ffffff;">
+										
+										<tr>
+											<td class="sm-pad" align="center" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: center; max-width: 640px; padding: 10px 10px 15px; background-color: #ffffff;color: #0068A5;">
+												<a href="https://www.stengg.com/en/electronics/companies-affiliates/st-electronics-info-security/cybersecurity-training-and-range/"
+													rel="noopener" style="text-decoration: underline; color: #0068A5;"
+													target="_blank">Click Here For More Courses</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+			          </td>
+			        </tr>
+			      </table>
+			      <![endif]-->
+					</td>
+				</tr>
+				<!-- Box color1 register with Text : END -->
+				<!-- Box color1 register with Text : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#ffffff" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #ffffff;">
+						<!--[if mso]>
+							<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+							  <tr>
+								<td align="center" valign="top" width="100%" style="width:100%;">
+								  <![endif]-->
+						<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#ffffff;">
+							<tr>
+								<td class="stack-column " width="100%" valign="top"
+									style="font-family:Helvetica, sans-serif; font-size:16px;background-color: #ffffff; color: #ffffff; ">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:100%;background-color:#ffffff;">
+										<tr>
+											<td align="center" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 14px; line-height: 20px; color: #555555;  text-align: center; max-width: 640px; padding: 0; background-color: #ffffff;">
+												<!--[if mso]>
+												<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+												<tr>
+													<td align="center" valign="top" width="100%" style="width:100%;">
+												  <![endif]-->
+												<table bgcolor="#E0E0E0" border="0" cellpadding="0" cellspacing="0"
+													align="center" width="100%"
+													style="max-width:640px;background-color:#E0E0E0">
+													<tr>
+														<td class="stack-column" bgcolor="#E0E0E0"
+															style="background-color: #E0E0E0" align="center"
+															width="160">
+															<img align="center" alt="Image" border="0"
+																class="center fixedwidth"
+																src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/contacticon.png"
+																style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 96px; display: block;"
+																title="Image" width="96">
+
+														</td>
+														<td class="stack-column" bgcolor="#E0E0E0"
+															style="background-color: #E0E0E0;" align="center"
+															width="480" valign="middle">
+															<table bgcolor="#E0E0E0" border="0" cellpadding="0"
+																cellspacing="0" align="center" width="100%"
+																style="width:100%; max-width:640px;background-color:#E0E0E0">
+																<tr>
+																	<td class="smx-pad" bgcolor="#E0E0E0"
+																		style="background-color: #E0E0E0;font-family: Helvetica, Arial, sans-serif;padding: 0 50px 0"
+																		align="left" width="100%" valign="middle">
+																		<table bgcolor="#E0E0E0" border="0"
+																			cellpadding="0" cellspacing="0"
+																			align="center" width="100%"
+																			style="max-width:640px;background-color:#E0E0E0">
+																			<tr>
+																				<td bgcolor="#E0E0E0"
+																					style="background-color: #E0E0E0;font-family: Helvetica, Arial, sans-serif;"
+																					align="left" width="100%"
+																					valign="middle">
+																					<p
+																						style="font-size: 14px; line-height: 19px; margin: 0;font-family: Helvetica, Arial, sans-serif;">
+																						<span
+																							style="color: #333333; line-height: 19px; font-size: 16px;">For
+																							enquiries, please email us
+																							at
+																						</span></p>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td bgcolor="#E0E0E0"
+																					style="background-color: #E0E0E0;font-family: Helvetica, Arial, sans-serif;"
+																					align="left" width="100%">
+																					<a href="mailto:cyber.academy@stengg.com"
+																						rel="noopener"
+																						style="text-decoration: underline; color: #0068A5;text-decoration: underline; line-height: 19px; font-size: 16px;"
+																						target="_blank">cyber.academy@stengg.com</a>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td bgcolor="#E0E0E0"
+																					style="background-color: #E0E0E0;font-family: Helvetica, Arial, sans-serif;"
+																					align="left" width="100%">
+																					<p
+																						style="color: #333333; line-height: 19px; font-size: 16px;display: inline-block; margin: 0; padding: 5px 0">
+																						or
+																						call <a href="tel:+65 6513 9535"
+																							rel="noopener"
+																							style="text-decoration: underline; color: #0068A5;text-decoration: underline; line-height: 19px; font-size: 16px;display: inline-block"
+																							target="_blank">+65 6513
+																							9535</a></p>
+
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+												<!--[if mso]>
+												</td>
+												</tr>
+												</table>
+												<![endif]-->
+											</td>
+										</tr>
+
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+						  </td>
+						</tr>
+					  </table>
+					  <![endif]-->
+					</td>
+				</tr>
+				<!-- Box color1 register with Text : END -->
+				<!-- Box color1 register with Text : BEGIN -->
+				<tr>
+					<!-- dir=ltr is where the magic happens. This can be changed to dir=rtl to swap the alignment on wide while maintaining stack order on narrow. -->
+					<td width="100%" dir="ltr" bgcolor="#ffffff" valign="middle" align="center"
+						style="background-position:center !important;background-size:cover !important; background-color: #ffffff;">
+						<!--[if mso]>
+								<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+								  <tr>
+									<td align="center" valign="top" width="100%" style="width:100%;">
+									  <![endif]-->
+						<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
+							style="max-width:640px;background-color:#393939;">
+							<tr>
+								<td class="stack-column " width="100%" valign="top"
+									style="font-family:Helvetica, sans-serif; font-size:16px;background-color: #393939; color: #C0C0C0; ">
+									<table bgcolor="" border="0" cellpadding="0" cellspacing="0" align="center"
+										width="100%" style="max-width:100%;background-color:#393939;">
+										<tr>
+											<td align="center" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 12px; line-height: 14px; color: #C0C0C0;  text-align: center; max-width: 640px; padding: 35px 20px; background-color: #393939;">
+
+												<p
+													style="font-family:  Helvetica, Arial, sans-serif;font-size: 12px; line-height: 14px; text-align: center; margin: 0;">
+													<em>ST Engineering Cybersecurity Academy reserves the right to make
+														amendments to the course agenda and dates without prior
+														notice.<br></em></p>
+												<p
+													style="font-family:  Helvetica, Arial, sans-serif;font-size: 12px; line-height: 14px; text-align: center; margin: 0;">
+													&nbsp;</p>
+												<p
+													style="font-family:  Helvetica, Arial, sans-serif;font-size: 12px; line-height: 14px; text-align: center; margin: 0;">
+													Copyright © 2019 | ST Engineering Cybersecurity Academy. All rights
+													reserved.</p>
+												<p
+													style="font-family:  Helvetica, Arial, sans-serif;font-size: 12px; line-height: 14px; text-align: center; margin: 0;">
+													&nbsp;</p>
+												<p
+													style="font-family:  Helvetica, Arial, sans-serif;font-size: 12px; line-height: 14px; text-align: center; margin: 0;">
+													<span
+														style="font-family:  Helvetica, Arial, sans-serif;color: #ffffff; font-size: 12px; line-height: 14px;">Changed
+														your mind? You can <span
+															style="font-size: 12px; line-height: 14px;"><a
+																href="*|UNSUB|*" rel="noopener"
+																style="text-decoration: underline; color: #FFFFFF;font-family:  Helvetica, Arial, sans-serif;"
+																target="_blank">unsubscribe</a></span> at any
+														time.</span>
+												</p>
+											</td>
+										</tr>
+										<tr>
+											<td align="center" width="100%" valign="middle"
+												style="font-family: 'Helvetica Regular', HelveticaRegular, Helvetica, Arial, 'Lucida Grande', sans-serif ; font-size: 12px; line-height: 14px; color: #C0C0C0;  text-align: center; max-width: 640px; padding:  0; background-color: #393939;">
+												<!--[if mso]>
+												<table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="width:100%;">
+												<tr>
+													<td align="center" valign="top" width="100%" style="width:100%;">
+												  <![endif]-->
+												<table bgcolor="#393939" border="0" cellpadding="0" cellspacing="0"
+													align="center" width="100%"
+													style="max-width:640px;background-color:#393939">
+													<tr>
+														<td class="stack-column" bgcolor="#393939"
+															style="background-color: #393939; padding: 15px 0 10px 0;"
+															align="center" width="160">
+															<a href="https://www.linkedin.com/showcase/st-engineering-cybersecurity/"
+																target="_blank"><img alt="LinkedIn" height="32"
+																	src="http://edm-demos.constructdigital.net/EDM/STE/img/CSBD/linkedin@2x.png"
+																	style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; height: auto; float: none; border: none; display: block;"
+																	title="LinkedIn" width="32" class="g-img"></a>
+
+														</td>
+														
+													</tr>
+												</table>
+												<!--[if mso]>
+												  </td>
+												  </tr>
+												  </table>
+												  <![endif]-->
+											</td>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!--[if mso]>
+							  </td>
+							</tr>
+						  </table>
+						  <![endif]-->
+					</td>
+				</tr>
+				<!-- Box color1 register with Text : END -->
+
+			</table>
+			<!-- Email Body : END -->
+			<!--[if mso]>
+    </td>
+  	</tr>
+	</table>
+	<![endif]-->
+
+		</center>
+	</body>
+
+</html>
